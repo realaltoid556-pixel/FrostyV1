@@ -1,66 +1,82 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-		/>
-		<title>Scramjet</title>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+        <title>Frosty</title>
 
-		<link rel="shortcut icon" content="favicon.webp" />
-	
-		<script src="/scram/scramjet.all.js"></script>
-		<script src="/baremux/index.js"></script>
-		
-		<link rel="stylesheet" href="index.css" />
-		<script src="register-sw.js" defer></script>
-		<script src="search.js" defer></script>
-		<script src="index.js" defer></script>
-	</head>
+        <link rel="shortcut icon" content="star-favicon.webp" />
+        
+        <script src="https://unpkg.com/lucide@latest"></script>
+        
+        <link rel="stylesheet" href="index.css" />
+        
+        <script src="register-sw.js" defer></script>
+        <script src="search.js" defer></script>
+        <script src="index.js" defer></script><script src="theme.js"></script>
+<script src="index.js" defer></script>
+    </head>
 
-	<body>
-		<div title="Scramjet Logo" class="flex-center logo-wrapper header-center">
-			<img class="logo" src="sj.png" alt="Scramjet" />
-			<h1>Scramjet | MW</h1>
-		</div>
-		<div class="flex-center desc left-margin">
-			<p>
-				Scramjet is an experimental interception based web proxy designed to
-				evade internet censorship, bypass arbitrary web browser restrictions and
-				innovate web proxy technologies.
-			</p>
-		</div>
+    <body>
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
 
-		<form id="sj-form" class="flex-center">
-			<input
-				id="sj-search-engine"
-				value="https://www.google.com/search?q=%s"
-				type="hidden"
-			/>
-			<input id="sj-address" type="text" placeholder="Search the web freely" />
-		</form>
-		<div class="desc left-margin">
-			<p id="sj-error"></p>
-			<pre id="sj-error-code"></pre>
-		</div>
-		<footer>
-			<div>
-				<a
-					title="The Mercury Workshop GitHub organization"
-					href="https://github.com/MercuryWorkshop"
-					>Mercury Workshop</a
-				>
-				<a
-					title="The example demo app for Scramjet"
-					href="https://github.com/MercuryWorkshop/Scramjet-Demo"
-					>GitHub</a
-				>
-				<a title="License information" href="credits.html">Credits</a>
-			</div>
-			<div>
-				<span>Scramjet &copy; MW 2025</span>
-			</div>
-		</footer>
-	</body>
+        <!-- Top Navigation Bar -->
+        <nav class="top-nav">
+            <div class="nav-left">
+                <a href="index.html" title="Home" class="nav-item">
+                    <i data-lucide="home"></i>
+                </a>
+            </div>
+            <div class="nav-right">
+                <a href="games.html" class="nav-item">
+                    <i data-lucide="gamepad-2"></i>
+                    <span>Games</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i data-lucide="settings"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </nav>
+
+        <div title="Frosty Logo" class="flex-center logo-wrapper header-center">
+            <h1 class="brand-text">Frosty</h1>
+        </div>
+
+        <div class="flex-center desc left-margin">
+            <p>
+                Search the web with no internet restrictions
+            </p>
+        </div>
+
+        <form id="sj-form" class="flex-center">
+            <input
+                id="sj-search-engine"
+                value="https://www.google.com/search?q=%s"
+                type="hidden"
+            />
+            <div class="input-container">
+                <i data-lucide="search" class="search-icon"></i>
+                <input id="sj-address" type="text" placeholder="Explore the universe of information..." />
+            </div>
+        </form>
+
+        <div class="desc left-margin">
+            <p id="sj-error"></p>
+            <pre id="sj-error-code"></pre>
+        </div>
+
+        <footer>
+            <div>
+                <span>Frosty &copy; 2026</span>
+            </div>
+        </footer>
+
+        <script>
+            // Initializes the icons
+            lucide.createIcons();
+        </script>
+    </body>
 </html>

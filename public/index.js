@@ -1,64 +1,27 @@
 "use strict";
-/**
- * @type {HTMLFormElement}
- */
+
 const form = document.getElementById("sj-form");
-/**
- * @type {HTMLInputElement}
- */
 const address = document.getElementById("sj-address");
-/**
- * @type {HTMLInputElement}
- */
 const searchEngine = document.getElementById("sj-search-engine");
-/**
- * @type {HTMLParagraphElement}
- */
 const error = document.getElementById("sj-error");
-/**
- * @type {HTMLPreElement}
- */
 const errorCode = document.getElementById("sj-error-code");
 
-const { ScramjetController } = $scramjetLoadController();
-
-const scramjet = new ScramjetController({
-	files: {
-		wasm: "/scram/scramjet.wasm.wasm",
-		all: "/scram/scramjet.all.js",
-		sync: "/scram/scramjet.sync.js",
-	},
-});
-
-scramjet.init();
-
-const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
-
 form.addEventListener("submit", async (event) => {
-	event.preventDefault();
+    event.preventDefault();
 
-	try {
-		await registerSW();
-	} catch (err) {
-		error.textContent = "Failed to register service worker.";
-		errorCode.textContent = err.toString();
-		throw err;
-	}
+    try {
+        // We still register the SW here to ensure it's ready before the next page loads
+        await registerSW();
+        
+        // Use the search function from search.js to format the URL
+        const url = search(address.value, searchEngine.value);
 
-	const url = search(address.value, searchEngine.value);
+        // Redirect to search.html and pass the URL as a base64 string (cleaner for URLs)
+        // or just as a URI component
+        window.location.href = "search.html?url=" + encodeURIComponent(url);
 
-	let wispUrl =
-		(location.protocol === "https:" ? "wss" : "ws") +
-		"://" +
-		location.host +
-		"/wisp/";
-	if ((await connection.getTransport()) !== "/libcurl/index.mjs") {
-		await connection.setTransport("/libcurl/index.mjs", [
-			{ websocket: wispUrl },
-		]);
-	}
-	const frame = scramjet.createFrame();
-	frame.frame.id = "sj-frame";
-	document.body.appendChild(frame.frame);
-	frame.go(url);
+    } catch (err) {
+        error.textContent = "Failed to coordinate navigation.";
+        errorCode.textContent = err.toString();
+    }
 });
